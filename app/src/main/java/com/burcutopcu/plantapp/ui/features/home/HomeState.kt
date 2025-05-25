@@ -1,11 +1,14 @@
 package com.burcutopcu.plantapp.ui.features.home
 
-data class HomeState(
-    val uiState: UiState = UiState.Loading,
-)
+import com.burcutopcu.plantapp.data.localmodel.categories.CategoryItemEntity
+import com.burcutopcu.plantapp.data.localmodel.questions.QuestionEntity
 
-enum class UiState {
-    Loading,
-    Success,
-    Failure
+sealed class HomeState {
+    data object Loading : HomeState()
+    data class Success(
+        val categories: List<CategoryItemEntity>,
+        val questions: List<QuestionEntity>
+    ) : HomeState()
+
+    data class Error(val message: String) : HomeState()
 }
