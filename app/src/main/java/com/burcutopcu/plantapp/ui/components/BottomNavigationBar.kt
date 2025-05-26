@@ -25,6 +25,8 @@ import androidx.navigation.NavDestination
 import com.burcutopcu.plantapp.R
 import com.burcutopcu.plantapp.ui.navigation.AppDestination
 import com.burcutopcu.plantapp.ui.navigation.Navigator
+import com.burcutopcu.plantapp.ui.theme.BottomNavBarGray
+import com.burcutopcu.plantapp.ui.theme.ButtonGreen
 
 @Composable
 fun BottomNavigationBar(
@@ -51,14 +53,14 @@ fun BottomNavigationBar(
                             ),
                             contentDescription = "Home",
                             modifier = Modifier.size(24.dp),
-                            tint = if (isHomeSelected) Color(0xFF28AF6E) else Color(0xFF9E9E9E)
+                            tint = if (isHomeSelected) ButtonGreen else BottomNavBarGray
                         )
                     },
                     label = {
                         Text(
                             text = "Home",
                             fontSize = 10.sp,
-                            color = if (isHomeSelected) Color(0xFF28AF6E) else Color(0xFF9E9E9E)
+                            color = if (isHomeSelected) ButtonGreen else BottomNavBarGray
                         )
                     },
                     selected = isHomeSelected,
@@ -82,14 +84,14 @@ fun BottomNavigationBar(
                             ),
                             contentDescription = "Diagnose",
                             modifier = Modifier.size(24.dp),
-                            tint = if (isDiagnoseSelected) Color(0xFF28AF6E) else Color(0xFF9E9E9E)
+                            tint = if (isDiagnoseSelected) ButtonGreen else BottomNavBarGray
                         )
                     },
                     label = {
                         Text(
                             text = "Diagnose",
                             fontSize = 10.sp,
-                            color = if (isDiagnoseSelected) Color(0xFF28AF6E) else Color(0xFF9E9E9E)
+                            color = if (isDiagnoseSelected) ButtonGreen else BottomNavBarGray
                         )
                     },
                     selected = isDiagnoseSelected,
@@ -115,14 +117,14 @@ fun BottomNavigationBar(
                             ),
                             contentDescription = "My Garden",
                             modifier = Modifier.size(24.dp),
-                            tint = if (isGardenSelected) Color(0xFF28AF6E) else Color(0xFF9E9E9E)
+                            tint = if (isGardenSelected) ButtonGreen else BottomNavBarGray
                         )
                     },
                     label = {
                         Text(
                             text = "My Garden",
                             fontSize = 10.sp,
-                            color = if (isGardenSelected) Color(0xFF28AF6E) else Color(0xFF9E9E9E)
+                            color = if (isGardenSelected) ButtonGreen else BottomNavBarGray
                         )
                     },
                     selected = isGardenSelected,
@@ -146,14 +148,14 @@ fun BottomNavigationBar(
                             ),
                             contentDescription = "Profile",
                             modifier = Modifier.size(24.dp),
-                            tint = if (isProfileSelected) Color(0xFF28AF6E) else Color(0xFF9E9E9E)
+                            tint = if (isProfileSelected) ButtonGreen else BottomNavBarGray
                         )
                     },
                     label = {
                         Text(
                             text = "Profile",
                             fontSize = 10.sp,
-                            color = if (isProfileSelected) Color(0xFF28AF6E) else Color(0xFF9E9E9E)
+                            color = if (isProfileSelected) ButtonGreen else BottomNavBarGray
                         )
                     },
                     selected = isProfileSelected,
@@ -172,7 +174,7 @@ fun BottomNavigationBar(
                 onClick = {
                     navigator.navigateTo(AppDestination.Scan.route)
                 },
-                containerColor = Color(0xFF28AF6E),
+                containerColor = ButtonGreen,
                 shape = CircleShape,
                 contentColor = Color.White,
                 modifier = Modifier
