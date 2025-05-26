@@ -45,7 +45,7 @@ fun OnboardingStartScreen(
         Spacer(modifier = Modifier.height(60.dp))
 
         Image(
-            painter = painterResource(R.drawable.ic_take_photo),
+            painter = painterResource(R.drawable.ic_identify_plant_title),
             contentDescription = null
         )
 

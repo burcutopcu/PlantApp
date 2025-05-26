@@ -46,7 +46,7 @@ fun OnboardingFinishScreen(
         Spacer(modifier = Modifier.height(60.dp))
 
         Image(
-            painter = painterResource(R.drawable.ic_get_plant_care_guides),
+            painter = painterResource(R.drawable.ic_get_guide_title),
             contentDescription = null
         )
 

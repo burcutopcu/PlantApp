@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.burcutopcu.plantapp.ui.BottomNavigationBar
 import com.burcutopcu.plantapp.ui.features.home.HomeScreen
 import com.burcutopcu.plantapp.ui.features.onboarding.GetStartedScreen
 import com.burcutopcu.plantapp.ui.features.onboarding.OnboardingFinishScreen
@@ -41,7 +42,11 @@ fun MainNavHost() {
 
     Scaffold(
         contentWindowInsets = WindowInsets(0),
-        bottomBar = {}
+        bottomBar = {
+            if (showBottomBar) {
+                BottomNavigationBar(currentDestination, navigator)
+            }
+        }
     ) { paddingValues ->
         Box(
             modifier = Modifier
