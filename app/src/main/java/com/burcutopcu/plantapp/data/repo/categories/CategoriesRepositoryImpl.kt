@@ -38,37 +38,4 @@ class CategoriesRepositoryImpl @Inject constructor(
             emit(Resource.Error(e.localizedMessage ?: "Unknown error occurred"))
         }
     }
-
-    override suspend fun getCategoryById(id: Int): Flow<Resource<CategoryItemEntity>> = flow {
-        emit(Resource.Loading())
-
-        try {
-            val localCategory = categoryDao.getCategoryById(id)
-            if (localCategory != null) {
-                emit(Resource.Success(localCategory))
-            } else {
-                emit(Resource.Error("Category not found"))
-            }
-        } catch (e: Exception) {
-            emit(Resource.Error(e.localizedMessage ?: "Unknown error occurred"))
-        }
-    }
-
-    override suspend fun refreshCategories(): Result<Unit> {
-        return try {
-            val response = remoteDataSource.service.getCategories()
-            if (response.isSuccessful) {
-                response.body()?.let { categoriesResponse ->
-                    val categoryEntities = mapDtoToEntity(categoriesResponse.data)
-                    categoryDao.deleteAllCategories()
-                    categoryDao.insertCategories(categoryEntities)
-                    Result.success(Unit)
-                } ?: Result.failure(Exception("Response body is null"))
-            } else {
-                Result.failure(Exception("HTTP ${response.code()}: ${response.message()}"))
-            }
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
 }

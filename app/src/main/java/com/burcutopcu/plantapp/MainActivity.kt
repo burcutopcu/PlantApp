@@ -6,6 +6,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Surface
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Modifier
 import com.burcutopcu.plantapp.ui.navigation.MainNavHost
 import com.burcutopcu.plantapp.ui.theme.PlantAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,7 +22,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PlantAppTheme {
-                MainNavHost()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    MainNavHost()
+                }
             }
         }
     }

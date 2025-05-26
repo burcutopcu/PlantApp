@@ -6,6 +6,4 @@ import kotlinx.coroutines.flow.Flow
 
 interface CategoriesRepository {
     suspend fun getCategories(): Flow<Resource<List<CategoryItemEntity>>>
-    suspend fun getCategoryById(id: Int): Flow<Resource<CategoryItemEntity>>
-    suspend fun refreshCategories(): Result<Unit>
 }

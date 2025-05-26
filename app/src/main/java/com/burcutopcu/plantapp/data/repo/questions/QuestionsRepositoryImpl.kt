@@ -50,37 +50,4 @@ class QuestionsRepositoryImpl(
             emit(Resource.Error(e.message ?: "Unknown error occurred"))
         }
     }
-
-    override suspend fun getQuestionById(id: Int): Flow<Resource<QuestionEntity>> = flow {
-        try {
-            emit(Resource.Loading())
-
-            val question = questionsDao.getQuestionById(id)
-            if (question != null) {
-                emit(Resource.Success(question))
-            } else {
-                emit(Resource.Error("Question not found"))
-            }
-        } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: "Unknown error occurred"))
-        }
-    }
-
-    override suspend fun refreshQuestions(): Result<Unit> {
-        return try {
-            val response = remoteDataSource.service.getQuestions()
-            if (response.isSuccessful) {
-                response.body()?.let { questionsResponse ->
-                    val questionEntities = QuestionMapper.mapDtoToEntity(questionsResponse)
-                    questionsDao.deleteAllQuestions()
-                    questionsDao.insertQuestions(questionEntities)
-                    Result.success(Unit)
-                } ?: Result.failure(Exception("Response body is null"))
-            } else {
-                Result.failure(Exception("HTTP ${response.code()}: ${response.message()}"))
-            }
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
 }
