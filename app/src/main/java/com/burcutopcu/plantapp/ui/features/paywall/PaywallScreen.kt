@@ -38,8 +38,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -142,7 +146,12 @@ fun PaywallScreen(
             verticalArrangement = Arrangement.Bottom
         ) {
             Text(
-                text = "PlantApp Premium",
+                text = buildAnnotatedString {
+                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append(stringResource(R.string.app_name))
+                    }
+                    append(stringResource(R.string.paywall_premium))
+                },
                 fontSize = 32.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White,
@@ -150,7 +159,7 @@ fun PaywallScreen(
             )
 
             Text(
-                text = "Access All Features",
+                text = stringResource(R.string.paywall_access_all_features),
                 fontSize = 18.sp,
                 color = Color.White.copy(alpha = 0.8f),
                 modifier = Modifier.fillMaxWidth()
@@ -160,7 +169,7 @@ fun PaywallScreen(
 
             val configuration = LocalConfiguration.current
             val screenWidth = configuration.screenWidthDp.dp
-            val cardWidth = (screenWidth - 40.dp) / 2.5f // 40dp = horizontal padding
+            val cardWidth = (screenWidth - 40.dp) / 2.5f
 
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
@@ -168,8 +177,8 @@ fun PaywallScreen(
             ) {
                 item {
                     FeatureCard(
-                        title = "Unlimited",
-                        subtitle = "Plant Identify",
+                        title = stringResource(R.string.paywall_unlimited),
+                        subtitle = stringResource(R.string.paywall_plant_identity),
                         iconPlaceholder = R.drawable.ic_identify_unlimited,
                         modifier = Modifier.width(cardWidth)
                     )
@@ -177,8 +186,8 @@ fun PaywallScreen(
 
                 item {
                     FeatureCard(
-                        title = "Faster",
-                        subtitle = "Process",
+                        title = stringResource(R.string.paywall_plant_faster),
+                        subtitle = stringResource(R.string.paywall_plant_process),
                         iconPlaceholder = R.drawable.ic_identify_faster,
                         modifier = Modifier.width(cardWidth)
                     )
@@ -186,8 +195,8 @@ fun PaywallScreen(
 
                 item {
                     FeatureCard(
-                        title = "Better",
-                        subtitle = "Results",
+                        title = stringResource(R.string.paywall_plant_better),
+                        subtitle = stringResource(R.string.paywall_plant_result),
                         iconPlaceholder = R.drawable.ic_identify_faster,
                         modifier = Modifier.width(cardWidth)
                     )
@@ -200,16 +209,16 @@ fun PaywallScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 PricingOption(
-                    title = "1 Month",
-                    price = "$2.99/month, auto renewable",
+                    title = stringResource(R.string.paywall_one_month),
+                    price = stringResource(R.string.paywall_one_month_price),
                     isSelected = false,
                     onClick = { /* Handle selection */ }
                 )
 
                 Box {
                     PricingOption(
-                        title = "1 Year",
-                        price = "First 3 days free, then $529.99/year",
+                        title = stringResource(R.string.paywall_one_year),
+                        price = stringResource(R.string.paywall_one_year_price),
                         isSelected = true,
                         onClick = { /* Handle selection */ }
                     )
@@ -229,7 +238,7 @@ fun PaywallScreen(
                             .padding(horizontal = 12.dp, vertical = 6.dp)
                     ) {
                         Text(
-                            text = "Save 50%",
+                            text = stringResource(R.string.paywall_save_half),
                             color = Color.White,
                             fontSize = 12.sp,
                             fontWeight = FontWeight.SemiBold
@@ -255,7 +264,7 @@ fun PaywallScreen(
                 enabled = true
             ) {
                 Text(
-                    text = "Try free for 3 days",
+                    text = stringResource(R.string.paywall_try_free_button),
                     color = Color.White,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold
@@ -265,7 +274,7 @@ fun PaywallScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "After the 3-day free trial period you'll be charged $274.99 per year unless you cancel before the trial expires. Yearly Subscription is Auto-Renewable",
+                text = stringResource(R.string.paywall_free_trial_description),
                 fontSize = 9.sp,
                 color = Color.White.copy(alpha = 0.7f),
                 textAlign = TextAlign.Center,
@@ -279,19 +288,19 @@ fun PaywallScreen(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
-                BottomLink(text = "Terms") { /* Handle Terms */ }
+                BottomLink(text = stringResource(R.string.paywall_terms)) { /* Handle Terms */ }
                 Text(
                     text = " • ",
                     color = Color.White.copy(alpha = 0.7f),
                     fontSize = 12.sp
                 )
-                BottomLink(text = "Privacy") { /* Handle Privacy */ }
+                BottomLink(text = stringResource(R.string.paywall_privacy)) { /* Handle Privacy */ }
                 Text(
                     text = " • ",
                     color = Color.White.copy(alpha = 0.7f),
                     fontSize = 12.sp
                 )
-                BottomLink(text = "Restore") { /* Handle Restore */ }
+                BottomLink(text = stringResource(R.string.paywall_restore)) { /* Handle Restore */ }
             }
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -334,11 +343,13 @@ fun FeatureCard(
                 )
             }
 
-            Column {
+            Column(
+                modifier = Modifier.padding(top = 10.dp)
+            ) {
                 Text(
                     text = title,
                     color = Color.White,
-                    fontSize = 16.sp,
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold
                 )
                 Text(
@@ -401,7 +412,7 @@ fun PricingOption(
                 Text(
                     text = price,
                     color = Color.White.copy(alpha = 0.8f),
-                    fontSize = 14.sp
+                    fontSize = 12.sp
                 )
             }
         }

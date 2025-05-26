@@ -69,7 +69,7 @@ fun GetStartedScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Identify more than 3000+ plants and 88% accuracy.",
+                text = stringResource(R.string.get_started_description),
                 style = MaterialTheme.typography.bodyLarge,
                 fontSize = 16.sp,
                 color = Color(0xFF666666),
@@ -104,7 +104,7 @@ fun GetStartedScreen(
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Text(
-                    text = "Get Started",
+                    text = stringResource(R.string.get_started_button),
                     color = Color.White,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold
@@ -112,7 +112,7 @@ fun GetStartedScreen(
             }
 
             Text(
-                text = "By tapping next, you are agreeing to PlantID\nTerms of Use & Privacy Policy.",
+                text = stringResource(R.string.get_started_agreement),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp, bottom = 50.dp),

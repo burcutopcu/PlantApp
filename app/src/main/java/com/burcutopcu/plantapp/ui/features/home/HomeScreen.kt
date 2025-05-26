@@ -37,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -94,7 +95,6 @@ fun HomeScreen(
             HomeContent(
                 categories = (uiState as HomeState.Success).categories,
                 questions = (uiState as HomeState.Success).questions,
-                navigator = navigator
             )
         }
     }
@@ -104,177 +104,175 @@ fun HomeScreen(
 fun HomeContent(
     categories: List<CategoryItemEntity>,
     questions: List<QuestionEntity>,
-    navigator: Navigator
 ) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize(),
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
-        item {
-            Box(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_home_search_background), // ← Header background PNG'ini koy
-                    contentDescription = null,
-                    modifier = Modifier.fillMaxWidth(),
-                    contentScale = ContentScale.Fit
-                )
+        Box(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_home_search_background),
+                contentDescription = null,
+                modifier = Modifier.fillMaxWidth(),
+                contentScale = ContentScale.Fit
+            )
 
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 60.dp)
-                        .padding(horizontal = 16.dp)
-                ) {
-                    Column {
-                        Text(
-                            text = "Hi, plant lover!",
-                            fontSize = 16.sp,
-                            color = Color.Black,
-                            fontWeight = FontWeight.Normal
-                        )
-
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = "Good Afternoon!",
-                                fontSize = 24.sp,
-                                color = Color.Black,
-                                fontWeight = FontWeight.Bold
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(
-                                text = " ⛅ ",
-                                fontSize = 20.sp
-                            )
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(24.dp))
-
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(48.dp)
-                            .background(
-                                Color.White.copy(alpha = 0.9f),
-                                RoundedCornerShape(12.dp)
-                            )
-                            .padding(horizontal = 16.dp),
-                        contentAlignment = Alignment.CenterStart
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_search),
-                                contentDescription = null,
-                                tint = Color.Gray,
-                                modifier = Modifier.size(20.dp)
-                            )
-                            Spacer(modifier = Modifier.width(12.dp))
-                            Text(
-                                text = "Search for plants",
-                                color = Color.Gray,
-                                fontSize = 16.sp
-                            )
-                        }
-                    }
-                }
-            }
-        }
-
-        item {
-            Card(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 24.dp)
-                    .padding(horizontal = 20.dp)
-                    .clickable { /* Premium action */ },
-                colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFF2D2D2D)
-                ),
-                shape = RoundedCornerShape(16.dp)
+                    .padding(top = 60.dp)
+                    .padding(horizontal = 16.dp)
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-                    Icon(
-                        painter = painterResource(R.drawable.ic_message),
-                        contentDescription = null,
-                        tint = Color.Unspecified
+                Column {
+                    Text(
+                        text = stringResource(R.string.home_welcome_text),
+                        fontSize = 16.sp,
+                        color = Color.Black,
+                        fontWeight = FontWeight.Normal
                     )
 
-                    Spacer(modifier = Modifier.width(16.dp))
-
-                    Column(
-                        modifier = Modifier.weight(1f)
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "FREE Premium Available",
-                            color = Color(0xFFE4B046),
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.SemiBold
+                            text = stringResource(R.string.home_good_afternoon),
+                            fontSize = 24.sp,
+                            color = Color.Black,
+                            fontWeight = FontWeight.Bold
                         )
+                        Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Tap to upgrade your account!",
-                            color = Color(0xFFE4B046),
-                            fontSize = 12.sp
+                            text = stringResource(R.string.home_cloud),
+                            fontSize = 20.sp
                         )
                     }
-
-                    Icon(
-                        painter = painterResource(R.drawable.ic_arrow_forward),
-                        contentDescription = null,
-                        tint = Color.Unspecified,
-                    )
                 }
-            }
-        }
 
-        item {
-            if (questions.isNotEmpty()) {
-                LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                    contentPadding =
-                    PaddingValues(horizontal = 20.dp, vertical = 24.dp)
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp)
+                        .background(
+                            Color.White.copy(alpha = 0.9f),
+                            RoundedCornerShape(12.dp)
+                        )
+                        .padding(horizontal = 16.dp),
+                    contentAlignment = Alignment.CenterStart
                 ) {
-                    items(questions) { question ->
-                        QuestionCard(
-                            question = question,
-                            onClick = { /* Question detail */ }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_search),
+                            contentDescription = null,
+                            tint = Color.Gray,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Text(
+                            text = stringResource(R.string.home_search_placeholder),
+                            color = Color.Gray,
+                            fontSize = 16.sp
                         )
                     }
                 }
+
+                Spacer(modifier = Modifier.height(24.dp))
             }
         }
 
-        item {
-            if (categories.isNotEmpty()) {
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.height(400.dp)
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            item {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp)
+                        .clickable { /* Premium action */ },
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color(0xFF2D2D2D)
+                    ),
+                    shape = RoundedCornerShape(16.dp)
                 ) {
-                    items(categories) { category ->
-                        CategoryCard(
-                            category = category,
-                            onClick = { /* Category detail */ }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_message),
+                            contentDescription = null,
+                            tint = Color.Unspecified
+                        )
+
+                        Spacer(modifier = Modifier.width(16.dp))
+
+                        Column(
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text(
+                                text = stringResource(R.string.home_premium_available_title),
+                                color = Color(0xFFE4B046),
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                            Text(
+                                text = stringResource(R.string.home_premium_available_description),
+                                color = Color(0xFFE4B046),
+                                fontSize = 12.sp
+                            )
+                        }
+
+                        Icon(
+                            painter = painterResource(R.drawable.ic_arrow_forward),
+                            contentDescription = null,
+                            tint = Color.Unspecified,
                         )
                     }
                 }
             }
-        }
 
-        item {
-            Spacer(modifier = Modifier.height(100.dp))
+            item {
+                if (questions.isNotEmpty()) {
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(10.dp),
+                        contentPadding = PaddingValues(horizontal = 20.dp, vertical = 24.dp)
+                    ) {
+                        items(questions) { question ->
+                            QuestionCard(
+                                question = question,
+                                onClick = { /* Question detail */ }
+                            )
+                        }
+                    }
+                }
+            }
+
+            item {
+                if (categories.isNotEmpty()) {
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(2),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        modifier = Modifier.height(400.dp)
+                    ) {
+                        items(categories) { category ->
+                            CategoryCard(
+                                category = category,
+                                onClick = { /* Category detail */ }
+                            )
+                        }
+                    }
+                }
+            }
+            item {
+                Spacer(modifier = Modifier.height(20.dp))
+            }
         }
     }
 }
