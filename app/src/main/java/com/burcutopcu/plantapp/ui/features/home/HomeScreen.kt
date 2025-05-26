@@ -1,5 +1,6 @@
 package com.burcutopcu.plantapp.ui.features.home
 
+import android.view.LayoutInflater
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -9,7 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,9 +25,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -39,14 +37,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.AsyncImage
 import com.burcutopcu.plantapp.R
 import com.burcutopcu.plantapp.data.localmodel.categories.CategoryItemEntity
 import com.burcutopcu.plantapp.data.localmodel.questions.QuestionEntity
+import com.burcutopcu.plantapp.ui.features.home.components.CategoryCard
+import com.burcutopcu.plantapp.ui.features.home.components.QuestionCard
 import com.burcutopcu.plantapp.ui.navigation.Navigator
 
 @Composable
@@ -58,37 +57,21 @@ fun HomeScreen(
 
     when (uiState) {
         is HomeState.Loading -> {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator(
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
+            AndroidView(
+                factory = { context ->
+                    LayoutInflater.from(context).inflate(R.layout.loading_screen, null)
+                },
+                modifier = Modifier.fillMaxSize()
+            )
         }
 
         is HomeState.Error -> {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "Something went wrong",
-                        style = MaterialTheme.typography.headlineSmall,
-                        color = Color.Red
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = (uiState as HomeState.Error).message,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = Color.Gray
-                    )
-                }
-            }
+            AndroidView(
+                factory = { context ->
+                    LayoutInflater.from(context).inflate(R.layout.error_screen, null)
+                },
+                modifier = Modifier.fillMaxSize()
+            )
         }
 
         is HomeState.Success -> {
@@ -273,94 +256,6 @@ fun HomeContent(
             item {
                 Spacer(modifier = Modifier.height(20.dp))
             }
-        }
-    }
-}
-
-@Composable
-fun QuestionCard(
-    question: QuestionEntity,
-    onClick: () -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .width(280.dp)
-            .height(160.dp)
-            .clickable { onClick() },
-        shape = RoundedCornerShape(16.dp)
-    ) {
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            AsyncImage(
-                model = question.imageUri,
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
-
-            Box(
-                modifier = Modifier
-                    .align(Alignment.BottomStart)
-                    .fillMaxWidth()
-                    .background(
-                        Color.Black.copy(alpha = 0.1f),
-                        RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp)
-                    ),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Text(
-                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp),
-                    text = question.title,
-                    color = Color.White,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-        }
-    }
-}
-
-
-@Composable
-fun CategoryCard(
-    category: CategoryItemEntity,
-    onClick: () -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .aspectRatio(1f)
-            .clickable { onClick() },
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        )
-    ) {
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Text(
-                text = category.name,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = Color.Black,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
-                    .align(Alignment.TopStart)
-                    .padding(16.dp)
-                    .fillMaxWidth(0.6f)
-            )
-
-            AsyncImage(
-                model = category.image.url,
-                contentDescription = null,
-                modifier = Modifier
-                    .align(Alignment.BottomEnd),
-                contentScale = ContentScale.FillHeight
-            )
         }
     }
 }

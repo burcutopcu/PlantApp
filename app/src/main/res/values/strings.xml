@@ -2,7 +2,7 @@
     <string name="app_name">PlantApp</string>
 
     <!--GET STARTED-->
-    <string name="welcome_text">Welcome to </string>
+    <string name="welcome_text">Welcome to\u0020</string>
     <string name="get_started_description">Identify more than 3000+ plants and 88% accuracy.</string>
     <string name="get_started_button">Get Started</string>
     <string name="get_started_agreement">By tapping next, you are agreeing to PlantID\nTerms of Use &amp; Privacy Policy.</string>
@@ -29,6 +29,7 @@
     <string name="paywall_terms">Terms</string>
     <string name="paywall_privacy">Privacy</string>
     <string name="paywall_restore">Restore</string>
+    <string name="paywall_dot"> • </string>
 
     <!--HOME-->
     <string name="home_welcome_text">Hi, plant lover!</string>
@@ -37,5 +38,18 @@
     <string name="home_search_placeholder">Search for plants</string>
     <string name="home_premium_available_title">FREE Premium Available</string>
     <string name="home_premium_available_description">Tap to upgrade your account!</string>
+
+    <!--COMING SOON-->
+    <string name="coming_soon_title">Coming Soon</string>
+    <string name="coming_soon_description">We are working on something amazing for you!</string>
+
+
+    <!-- LOADING -->
+    <string name="loading_title">Loading...</string>
+    <string name="loading_description">Please wait while we load your content</string>
+
+    <!-- ERROR -->
+    <string name="error_title">Oops! Something went wrong</string>
+    <string name="error_description">We couldn\'t load the content. Please check your internet connection and try again.</string>
 
 </resources>

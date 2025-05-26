@@ -1,6 +1,5 @@
 package com.burcutopcu.plantapp.ui.features.paywall
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,13 +23,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -48,6 +45,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.burcutopcu.plantapp.R
+import com.burcutopcu.plantapp.ui.features.paywall.components.BottomLink
+import com.burcutopcu.plantapp.ui.features.paywall.components.FeatureCard
+import com.burcutopcu.plantapp.ui.features.paywall.components.PricingOption
 import com.burcutopcu.plantapp.ui.navigation.AppDestination
 import com.burcutopcu.plantapp.ui.navigation.Navigator
 
@@ -56,6 +56,14 @@ fun PaywallScreen(
     navigator: Navigator,
     viewModel: PaywallViewModel = hiltViewModel()
 ) {
+
+    val uiState = viewModel.uiState.collectAsState()
+
+    LaunchedEffect(uiState.value) {
+        if (uiState.value is PaywallState.Success && (uiState.value as PaywallState.Success).isCompleted) {
+            navigator.navigateAndClearStack(AppDestination.Home)
+        }
+    }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -126,13 +134,12 @@ fun PaywallScreen(
                     )
                     .clickable {
                         viewModel.completeOnboarding()
-                        navigator.navigateAndClearStack(AppDestination.Home)
                     },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = "Close",
+                    contentDescription = null,
                     tint = Color.White,
                     modifier = Modifier.size(16.dp)
                 )
@@ -252,7 +259,6 @@ fun PaywallScreen(
             Button(
                 onClick = {
                     viewModel.completeOnboarding()
-                    navigator.navigateAndClearStack(AppDestination.Home)
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -290,13 +296,13 @@ fun PaywallScreen(
             ) {
                 BottomLink(text = stringResource(R.string.paywall_terms)) { /* Handle Terms */ }
                 Text(
-                    text = " • ",
+                    text = stringResource(R.string.paywall_dot),
                     color = Color.White.copy(alpha = 0.7f),
                     fontSize = 12.sp
                 )
                 BottomLink(text = stringResource(R.string.paywall_privacy)) { /* Handle Privacy */ }
                 Text(
-                    text = " • ",
+                    text = stringResource(R.string.paywall_dot),
                     color = Color.White.copy(alpha = 0.7f),
                     fontSize = 12.sp
                 )
@@ -306,128 +312,4 @@ fun PaywallScreen(
             Spacer(modifier = Modifier.height(20.dp))
         }
     }
-}
-
-@Composable
-fun FeatureCard(
-    title: String,
-    subtitle: String,
-    iconPlaceholder: Int,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier.height(120.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.Black.copy(alpha = 0.3f)
-        ),
-        shape = RoundedCornerShape(14.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(36.dp)
-                    .background(
-                        Color.White.copy(alpha = 0.2f),
-                        RoundedCornerShape(8.dp)
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(id = iconPlaceholder),
-                    contentDescription = null,
-                )
-            }
-
-            Column(
-                modifier = Modifier.padding(top = 10.dp)
-            ) {
-                Text(
-                    text = title,
-                    color = Color.White,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.SemiBold
-                )
-                Text(
-                    text = subtitle,
-                    color = Color.White.copy(alpha = 0.8f),
-                    fontSize = 14.sp
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun PricingOption(
-    title: String,
-    price: String,
-    isSelected: Boolean,
-    onClick: () -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable { onClick() },
-        colors = CardDefaults.cardColors(
-            containerColor = if (isSelected)
-                Color(0xFF28AF6E).copy(alpha = 0.2f)
-            else
-                Color.Black.copy(alpha = 0.3f)
-        ),
-        border = if (isSelected)
-            BorderStroke(2.dp, Color(0xFF28AF6E))
-        else
-            BorderStroke(1.dp, Color.White.copy(alpha = 0.2f)),
-        shape = RoundedCornerShape(14.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(20.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            RadioButton(
-                selected = isSelected,
-                onClick = onClick,
-                colors = RadioButtonDefaults.colors(
-                    selectedColor = Color(0xFF28AF6E),
-                    unselectedColor = Color.White.copy(alpha = 0.7f)
-                )
-            )
-
-            Spacer(modifier = Modifier.width(12.dp))
-
-            Column {
-                Text(
-                    text = title,
-                    color = Color.White,
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold
-                )
-                Text(
-                    text = price,
-                    color = Color.White.copy(alpha = 0.8f),
-                    fontSize = 12.sp
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun BottomLink(
-    text: String,
-    onClick: () -> Unit
-) {
-    Text(
-        text = text,
-        color = Color.White.copy(alpha = 0.7f),
-        fontSize = 11.sp,
-        modifier = Modifier.clickable { onClick() }
-    )
 }

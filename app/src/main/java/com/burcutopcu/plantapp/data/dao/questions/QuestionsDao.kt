@@ -12,9 +12,6 @@ interface QuestionsDao {
     @Query("SELECT * FROM questions ORDER BY `order` ASC")
     suspend fun getAllQuestions(): List<QuestionEntity>
 
-    @Query("SELECT * FROM questions WHERE id = :id")
-    suspend fun getQuestionById(id: Int): QuestionEntity?
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertQuestions(questions: List<QuestionEntity>)
 

@@ -12,9 +12,6 @@ interface CategoriesDao {
     @Query("SELECT * FROM categories ORDER BY rank ASC")
     suspend fun getAllCategories(): List<CategoryItemEntity>
 
-    @Query("SELECT * FROM categories WHERE id = :id")
-    suspend fun getCategoryById(id: Int): CategoryItemEntity?
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCategories(categories: List<CategoryItemEntity>)
 

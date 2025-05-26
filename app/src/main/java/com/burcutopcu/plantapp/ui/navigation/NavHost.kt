@@ -15,13 +15,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.burcutopcu.plantapp.ui.BottomNavigationBar
+import com.burcutopcu.plantapp.ui.components.BottomNavigationBar
+import com.burcutopcu.plantapp.ui.features.diagnose.DiagnoseScreen
 import com.burcutopcu.plantapp.ui.features.home.HomeScreen
+import com.burcutopcu.plantapp.ui.features.mygarden.MyGardenScreen
 import com.burcutopcu.plantapp.ui.features.onboarding.GetStartedScreen
 import com.burcutopcu.plantapp.ui.features.onboarding.OnboardingFinishScreen
 import com.burcutopcu.plantapp.ui.features.onboarding.OnboardingStartScreen
 import com.burcutopcu.plantapp.ui.features.onboarding.OnboardingViewModel
 import com.burcutopcu.plantapp.ui.features.paywall.PaywallScreen
+import com.burcutopcu.plantapp.ui.features.profile.ProfileScreen
+import com.burcutopcu.plantapp.ui.features.scan.ScanScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -78,19 +82,19 @@ fun MainNavHost() {
                 }
 
                 composable(AppDestination.Diagnose.route) {
-                    // DiagnoseScreen(navigator = navigator)
+                    DiagnoseScreen()
                 }
 
                 composable(AppDestination.Scan.route) {
-                    // ScanScreen(navigator = navigator)
+                    ScanScreen()
                 }
 
                 composable(AppDestination.MyGarden.route) {
-                    //  MyGardenScreen(navigator = navigator)
+                    MyGardenScreen()
                 }
 
                 composable(AppDestination.Profile.route) {
-                    // ProfileScreen(navigator = navigator)
+                    ProfileScreen()
                 }
             }
         }
