@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.burcutopcu.plantapp.ui.theme.ButtonGreen
 
 @Composable
 fun PricingOption(
@@ -35,12 +36,12 @@ fun PricingOption(
             .clickable { onClick() },
         colors = CardDefaults.cardColors(
             containerColor = if (isSelected)
-                Color(0xFF28AF6E).copy(alpha = 0.2f)
+                ButtonGreen.copy(alpha = 0.2f)
             else
                 Color.Black.copy(alpha = 0.3f)
         ),
         border = if (isSelected)
-            BorderStroke(2.dp, Color(0xFF28AF6E))
+            BorderStroke(2.dp, ButtonGreen)
         else
             BorderStroke(1.dp, Color.White.copy(alpha = 0.2f)),
         shape = RoundedCornerShape(14.dp)
@@ -55,7 +56,7 @@ fun PricingOption(
                 selected = isSelected,
                 onClick = onClick,
                 colors = RadioButtonDefaults.colors(
-                    selectedColor = Color(0xFF28AF6E),
+                    selectedColor = ButtonGreen,
                     unselectedColor = Color.White.copy(alpha = 0.7f)
                 )
             )

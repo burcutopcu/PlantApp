@@ -31,6 +31,9 @@ import androidx.compose.ui.unit.sp
 import com.burcutopcu.plantapp.R
 import com.burcutopcu.plantapp.ui.navigation.AppDestination
 import com.burcutopcu.plantapp.ui.navigation.Navigator
+import com.burcutopcu.plantapp.ui.theme.ButtonGreen
+import com.burcutopcu.plantapp.ui.theme.MainTextColor
+import com.burcutopcu.plantapp.ui.theme.TextGray
 
 @Composable
 fun GetStartedScreen(
@@ -63,7 +66,7 @@ fun GetStartedScreen(
                 },
                 style = MaterialTheme.typography.headlineMedium,
                 fontSize = 28.sp,
-                color = Color.Black,
+                color = MainTextColor,
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -72,7 +75,7 @@ fun GetStartedScreen(
                 text = stringResource(R.string.get_started_description),
                 style = MaterialTheme.typography.bodyLarge,
                 fontSize = 16.sp,
-                color = Color(0xFF666666),
+                color = MainTextColor,
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -99,7 +102,7 @@ fun GetStartedScreen(
                     .fillMaxWidth()
                     .height(56.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF28AF6E)
+                    containerColor = ButtonGreen
                 ),
                 shape = RoundedCornerShape(16.dp)
             ) {
@@ -118,7 +121,7 @@ fun GetStartedScreen(
                     .padding(top = 16.dp, bottom = 50.dp),
                 textAlign = TextAlign.Center,
                 fontSize = 12.sp,
-                color = Color(0xFF666666),
+                color = TextGray,
                 lineHeight = 16.sp
             )
         }

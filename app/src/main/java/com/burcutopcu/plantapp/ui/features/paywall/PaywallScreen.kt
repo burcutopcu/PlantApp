@@ -50,6 +50,9 @@ import com.burcutopcu.plantapp.ui.features.paywall.components.FeatureCard
 import com.burcutopcu.plantapp.ui.features.paywall.components.PricingOption
 import com.burcutopcu.plantapp.ui.navigation.AppDestination
 import com.burcutopcu.plantapp.ui.navigation.Navigator
+import com.burcutopcu.plantapp.ui.theme.ButtonGreen
+import com.burcutopcu.plantapp.ui.theme.DarkGreen
+import com.burcutopcu.plantapp.ui.theme.gradientColors
 
 @Composable
 fun PaywallScreen(
@@ -73,13 +76,7 @@ fun PaywallScreen(
                 .fillMaxSize()
                 .background(
                     Brush.verticalGradient(
-                        colors = listOf(
-                            Color(0xFF77A986),
-                            Color(0xFF77A986),
-                            Color(0xFF244128),
-                            Color(0xFF0F1A11),
-                            Color(0xFF000000)
-                        ),
+                        colors = gradientColors,
                         startY = 0f,
                         endY = Float.POSITIVE_INFINITY
                     )
@@ -107,8 +104,8 @@ fun PaywallScreen(
                             colors = listOf(
                                 Color.Transparent,
                                 Color.Transparent,
-                                Color(0xFF4A7C59).copy(alpha = 0.3f),
-                                Color(0xFF2D5233).copy(alpha = 0.7f)
+                                ButtonGreen.copy(alpha = 0.3f),
+                                DarkGreen.copy(alpha = 0.7f)
                             ),
                             startY = 0f,
                             endY = Float.POSITIVE_INFINITY
@@ -234,7 +231,7 @@ fun PaywallScreen(
                         modifier = Modifier
                             .align(Alignment.TopEnd)
                             .background(
-                                Color(0xFF28AF6E),
+                                ButtonGreen,
                                 RoundedCornerShape(
                                     topStart = 0.dp,
                                     topEnd = 20.dp,
@@ -264,7 +261,7 @@ fun PaywallScreen(
                     .fillMaxWidth()
                     .height(56.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF28AF6E)
+                    containerColor = ButtonGreen
                 ),
                 shape = RoundedCornerShape(12.dp),
                 enabled = true

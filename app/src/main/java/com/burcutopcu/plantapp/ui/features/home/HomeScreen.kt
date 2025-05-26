@@ -47,6 +47,8 @@ import com.burcutopcu.plantapp.data.localmodel.questions.QuestionEntity
 import com.burcutopcu.plantapp.ui.features.home.components.CategoryCard
 import com.burcutopcu.plantapp.ui.features.home.components.QuestionCard
 import com.burcutopcu.plantapp.ui.navigation.Navigator
+import com.burcutopcu.plantapp.ui.theme.PremiumBannerBrown
+import com.burcutopcu.plantapp.ui.theme.PremiumBannerYellow
 
 @Composable
 fun HomeScreen(
@@ -177,7 +179,7 @@ fun HomeContent(
                         .padding(horizontal = 20.dp)
                         .clickable { /* Premium action */ },
                     colors = CardDefaults.cardColors(
-                        containerColor = Color(0xFF2D2D2D)
+                        containerColor = PremiumBannerBrown
                     ),
                     shape = RoundedCornerShape(16.dp)
                 ) {
@@ -200,13 +202,13 @@ fun HomeContent(
                         ) {
                             Text(
                                 text = stringResource(R.string.home_premium_available_title),
-                                color = Color(0xFFE4B046),
+                                color = PremiumBannerYellow,
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.SemiBold
                             )
                             Text(
                                 text = stringResource(R.string.home_premium_available_description),
-                                color = Color(0xFFE4B046),
+                                color = PremiumBannerYellow,
                                 fontSize = 12.sp
                             )
                         }

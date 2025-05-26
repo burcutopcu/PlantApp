@@ -32,6 +32,8 @@ import androidx.compose.ui.unit.sp
 import com.burcutopcu.plantapp.R
 import com.burcutopcu.plantapp.ui.navigation.AppDestination
 import com.burcutopcu.plantapp.ui.navigation.Navigator
+import com.burcutopcu.plantapp.ui.theme.BottomNavBarGray
+import com.burcutopcu.plantapp.ui.theme.ButtonGreen
 
 @Composable
 fun OnboardingFinishScreen(
@@ -75,7 +77,7 @@ fun OnboardingFinishScreen(
                 .fillMaxWidth()
                 .height(56.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF28AF6E)
+                containerColor = ButtonGreen
             ),
             shape = RoundedCornerShape(16.dp)
         ) {
@@ -98,7 +100,7 @@ fun OnboardingFinishScreen(
             Box(
                 modifier = Modifier
                     .size(8.dp)
-                    .background(Color(0xFFE0E0E0), CircleShape)
+                    .background(BottomNavBarGray, CircleShape)
             )
             Spacer(modifier = Modifier.width(8.dp))
             Box(
