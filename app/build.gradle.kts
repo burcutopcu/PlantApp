@@ -122,4 +122,11 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
 
     implementation(libs.androidx.material)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.arch.core.testing)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.turbine)
 }
