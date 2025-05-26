@@ -1,10 +1,13 @@
 package com.burcutopcu.plantapp.di
 
+import android.content.SharedPreferences
 import com.burcutopcu.plantapp.data.repo.categories.CategoriesRepository
 import com.burcutopcu.plantapp.data.repo.categories.CategoriesRepositoryImpl
 import com.burcutopcu.plantapp.data.dao.categories.CategoriesDao
 import com.burcutopcu.plantapp.data.dao.questions.QuestionsDao
 import com.burcutopcu.plantapp.data.datasource.RemoteDataSource
+import com.burcutopcu.plantapp.data.repo.onboarding.OnboardingRepository
+import com.burcutopcu.plantapp.data.repo.onboarding.OnboardingRepositoryImpl
 import com.burcutopcu.plantapp.data.repo.questions.QuestionsRepository
 import com.burcutopcu.plantapp.data.repo.questions.QuestionsRepositoryImpl
 import dagger.Module
@@ -37,6 +40,16 @@ object RepositoryModule {
         return QuestionsRepositoryImpl(
             remoteDataSource,
             questionsDao
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideOnboardingRepository(
+        sharedPreferences: SharedPreferences
+    ): OnboardingRepository {
+        return OnboardingRepositoryImpl(
+            sharedPreferences
         )
     }
 }
